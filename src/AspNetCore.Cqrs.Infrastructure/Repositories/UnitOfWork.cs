@@ -5,17 +5,11 @@ using MediatR;
 
 namespace AspNetCore.Cqrs.Infrastructure.Repositories
 {
-    internal sealed class UnitOfWork : IUnitOfWork
+    internal sealed class UnitOfWork(WeatherContext context,
+        IPublisher mediator) : IUnitOfWork
     {
-        private readonly WeatherContext _context;
-        private readonly IPublisher _mediator;
-
-        public UnitOfWork(WeatherContext context,
-            IPublisher mediator)
-        {
-            _context = context;
-            _mediator = mediator;
-        }
+        private readonly WeatherContext _context = context;
+        private readonly IPublisher _mediator = mediator;
 
         public async Task<bool> CommitAsync(CancellationToken cancellationToken = default)
         {

@@ -34,13 +34,8 @@ namespace AspNetCore.Cqrs.Api.Infrastructure.ActionResults
         }
     }
 
-    public class CreatedResultEnvelope
+    public class CreatedResultEnvelope(Guid id)
     {
-        public Guid Id { get; set; }
-
-        public CreatedResultEnvelope(Guid id)
-        {
-            Id = id;
-        }
+        public Guid Id { get; set; } = id;
     }
 }

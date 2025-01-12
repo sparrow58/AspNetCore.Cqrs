@@ -5,14 +5,9 @@ using System.Data;
 
 namespace AspNetCore.Cqrs.Infrastructure.Repositories
 {
-    public sealed class DapperContext
+    public sealed class DapperContext(IOptions<DatabaseSettings> options)
     {
-        private readonly string? _connectionString;
-
-        public DapperContext(IOptions<DatabaseSettings> options)
-        {
-            _connectionString = options.Value.SqlConnectionString;
-        }
+        private readonly string? _connectionString = options.Value.SqlConnectionString;
 
         public IDbConnection CreateConnection() => new SqlConnection(_connectionString);
     }

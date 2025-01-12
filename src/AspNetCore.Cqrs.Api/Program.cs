@@ -13,7 +13,7 @@ builder.Host.RegisterDefaults();
 // Add services to the container.
 builder.Services.AddControllers(options =>
 {
-    options.Filters.Add(typeof(HttpGlobalExceptionFilter));
+    options.Filters.Add<HttpGlobalExceptionFilter>();
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -63,9 +63,9 @@ if (app.Environment.IsProduction())
     app.UseHsts();
     app.Use((context, next) =>
     {
-        context.Response.Headers.Add("X-Xss-Protection", "1; mode=block");
-        context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-        context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
+        context.Response.Headers["X-Xss-Protection"] = "1; mode=block";
+        context.Response.Headers["X-Content-Type-Options"] = "nosniff";
+        context.Response.Headers["X-Frame-Options"] = "SAMEORIGIN";
         return next.Invoke();
     });
 }

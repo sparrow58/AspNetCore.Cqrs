@@ -7,14 +7,9 @@ namespace AspNetCore.Cqrs.Application.Locations.Queries
 {
     public sealed record GetLocationQuery(Guid Id) : Query<LocationReadModel>;
 
-    public sealed class GetLocationQueryHandler : QueryHandler<GetLocationQuery, LocationReadModel>
+    public sealed class GetLocationQueryHandler(ILocationsReadModelRepository repository) : QueryHandler<GetLocationQuery, LocationReadModel>
     {
-        private readonly ILocationsReadModelRepository _repository;
-
-        public GetLocationQueryHandler(ILocationsReadModelRepository repository)
-        {
-            _repository = repository;
-        }
+        private readonly ILocationsReadModelRepository _repository = repository;
 
         protected override async Task<LocationReadModel> HandleAsync(GetLocationQuery request)
         {

@@ -11,14 +11,9 @@ namespace AspNetCore.Cqrs.Api.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public sealed class WeatherForecastsController : ControllerBase
+    public sealed class WeatherForecastsController(ISender mediator) : ControllerBase
     {
-        private readonly ISender _mediator;
-
-        public WeatherForecastsController(ISender mediator)
-        {
-            _mediator = mediator;
-        }
+        private readonly ISender _mediator = mediator;
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(WeatherForecastReadModel), StatusCodes.Status200OK)]
