@@ -14,7 +14,7 @@ The setup follows important modern development principles described here: https:
 
 The application extends the typical *Weather Forecast* example provided in default .NET project templates and contains the following components:
 
-- **API** - ASP.NET 7 REST API with Swagger support
+- **API** - ASP.NET 9 REST API with Swagger support
 - **Database** - SQL Server database integration via Entity Framework Core and Dapper
 - **Migrations** - Code-First database migrations managed using a console application
   
